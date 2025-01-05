@@ -43,7 +43,7 @@ fun DailyForecast(
     ConstraintLayout(
         modifier = modifier.fillMaxWidth()
     ) {
-        val (forecastImage, forecastValue, windImage, title, description, background) = createRefs()
+        val (forecastImage, forecastValue, title, description, background) = createRefs()
 
         CardBackground(
             modifier = Modifier.constrainAs(background) {
@@ -65,7 +65,8 @@ fun DailyForecast(
             modifier = Modifier
                 .height(175.dp)
                 .constrainAs(forecastImage) {
-                    start.linkTo(anchor = parent.start, margin = 4.dp)
+                    start.linkTo(anchor = parent.start, margin = 0.dp)
+                    end.linkTo(anchor =parent.end, margin = 120.dp )
                     top.linkTo(parent.top)
                 }
         )
@@ -100,6 +101,7 @@ fun DailyForecast(
                 bottom.linkTo(forecastImage.bottom)
             },
             degree = forecastDay.temperature
+
         )
     }
 }

@@ -46,7 +46,9 @@ fun WeatherScreen(viewModel: WeatherScreenViewModel = viewModel()) {
         locationPermissions.launchMultiplePermissionRequest()
     }
     LaunchedEffect(locationPermissions.allPermissionsGranted) {
-        viewModel.getForecastForLocation()
+        if (locationPermissions.allPermissionsGranted) {
+            viewModel.getForecastForLocation()
+        }
     }
     WeatherScreenContent(days = forecastDays, location = viewModel.currentLocation)
 }

@@ -35,13 +35,12 @@ class WeatherScreenViewModel @Inject constructor(
 
             // If location is retrieved, fetch the forecast
             currentLocation?.let { location ->
-                val days = generateNext4Days()
+                val days = generateNext7Days()
                 // Collect the forecast items and update state
                 val roundedLatitude = String.format("%.4f", location.latitude).toDouble()
                 val roundedLongitude = String.format("%.4f", location.longitude).toDouble()
 
                 launch {
-
                     weatherRepository.getForecastItems(roundedLatitude, roundedLongitude, days)
                         .collect { forecastItems ->
                             _forecastDays.value = forecastItems
@@ -55,7 +54,7 @@ class WeatherScreenViewModel @Inject constructor(
         }
     }
 
-    private fun generateNext4Days(): List<String> {
+    private fun generateNext7Days(): List<String> {
         val dateFormatter = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
         val calendar = java.util.Calendar.getInstance()
 

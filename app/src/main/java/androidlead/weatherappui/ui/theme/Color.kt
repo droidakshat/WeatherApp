@@ -6,9 +6,9 @@ val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
 
-val ColorGradient1 = Color(0xFFe262e6)
-val ColorGradient2 = Color(0xFF9f62ea)
-val ColorGradient3 = Color(0xFF5264f0)
+val ColorGradient1 = Color(0xFFFF7EB3) // Alternative Vibrant Pink
+val ColorGradient2 = Color(0xFFA362F9) // Alternative Lavender Purple
+val ColorGradient3 = Color(0xFF62A3F9)
 
 val ColorBackground = Color(0xFFF4DCF7).copy(alpha = 0.4f)
 val ColorSurface = Color.White

@@ -46,7 +46,7 @@ fun ActionBar(
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        ControlButton()
+        //ControlButton()
         LocationInfo(
             modifier = Modifier.padding(top = 10.dp),
             location = location
