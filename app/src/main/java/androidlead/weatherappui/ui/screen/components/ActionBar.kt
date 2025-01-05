@@ -38,7 +38,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ActionBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    location: String
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -48,7 +49,7 @@ fun ActionBar(
         ControlButton()
         LocationInfo(
             modifier = Modifier.padding(top = 10.dp),
-            location = "Rome"
+            location = location
         )
         ProfileButton()
     }
@@ -141,7 +142,6 @@ private fun LocationInfo(
                 fontWeight = FontWeight.Bold
             )
         }
-        ProgressBar()
     }
 }
 

@@ -57,6 +57,8 @@ dependencies {
     implementation(platform(libs.compose.bom))
     debugImplementation(libs.compose.tooling)
     implementation(libs.bundles.ui)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
 
     //Retrofit
     implementation(libs.retrofit)
@@ -70,5 +72,9 @@ dependencies {
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    //Location
+    implementation(libs.play.services.location)
+    implementation(libs.accompanist.permissions)
 
 }

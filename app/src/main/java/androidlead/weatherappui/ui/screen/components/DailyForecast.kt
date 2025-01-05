@@ -1,6 +1,7 @@
 package androidlead.weatherappui.ui.screen.components
 
 import androidlead.weatherappui.R
+import androidlead.weatherappui.ui.screen.util.ForecastItem
 import androidlead.weatherappui.ui.theme.ColorGradient1
 import androidlead.weatherappui.ui.theme.ColorGradient2
 import androidlead.weatherappui.ui.theme.ColorGradient3
@@ -37,8 +38,7 @@ import androidx.constraintlayout.compose.Dimension
 @Composable
 fun DailyForecast(
     modifier: Modifier = Modifier,
-    forecast: String = "Rain showers",
-    date: String = "Monday, 12 Feb"
+    forecastDay: ForecastItem
 ) {
     ConstraintLayout(
         modifier = modifier.fillMaxWidth()
@@ -59,7 +59,7 @@ fun DailyForecast(
         )
 
         Image(
-            painter = painterResource(R.drawable.img_sub_rain),
+            painter = painterResource(forecastDay.image),
             contentDescription = null,
             contentScale = ContentScale.FillHeight,
             modifier = Modifier
@@ -71,7 +71,7 @@ fun DailyForecast(
         )
 
         Text(
-            text = forecast,
+            text = forecastDay.weatherType,
             style = MaterialTheme.typography.titleLarge,
             color = ColorTextSecondary,
             fontWeight = FontWeight.Medium,
@@ -82,7 +82,7 @@ fun DailyForecast(
         )
 
         Text(
-            text = date,
+            text = "${forecastDay.dayOfWeek}, ${forecastDay.date}",
             style = MaterialTheme.typography.bodyMedium,
             color = ColorTextSecondaryVariant,
             modifier = Modifier
@@ -98,17 +98,8 @@ fun DailyForecast(
                 end.linkTo(anchor = parent.end, margin = 24.dp)
                 top.linkTo(forecastImage.top)
                 bottom.linkTo(forecastImage.bottom)
-            }
-        )
-
-        WindForecastImage(
-            modifier = Modifier.constrainAs(windImage) {
-                linkTo(
-                    top = title.top,
-                    bottom = title.bottom
-                )
-                end.linkTo(anchor = parent.end, margin = 24.dp)
-            }
+            },
+            degree = forecastDay.temperature
         )
     }
 }
@@ -134,8 +125,7 @@ private fun CardBackground(
 @Composable
 private fun ForecastValue(
     modifier: Modifier = Modifier,
-    degree: String = "21",
-    description: String = "Feels like 26°"
+    degree: String
 ) {
     Column(
         modifier = modifier,
@@ -170,11 +160,6 @@ private fun ForecastValue(
                 modifier = Modifier.padding(top = 2.dp)
             )
         }
-        Text(
-            text = description,
-            style = MaterialTheme.typography.bodyMedium,
-            color = ColorTextSecondaryVariant
-        )
     }
 }
 

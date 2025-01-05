@@ -1,7 +1,6 @@
 package androidlead.weatherappui.ui.screen.components
 
 import androidlead.weatherappui.R
-import androidlead.weatherappui.ui.screen.util.ForecastData
 import androidlead.weatherappui.ui.screen.util.ForecastItem
 import androidlead.weatherappui.ui.screen.util.fromHex
 import androidlead.weatherappui.ui.theme.ColorGradient1
@@ -48,7 +47,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun WeeklyForecast(
     modifier: Modifier = Modifier,
-    data: List<ForecastItem> = ForecastData
+    data: List<ForecastItem>
 ) {
     Column(
         modifier = modifier,
@@ -88,7 +87,6 @@ private fun WeatherForecastHeader(
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp
         )
-        ActionText()
     }
 }
 
@@ -121,50 +119,18 @@ private fun Forecast(
     modifier: Modifier = Modifier,
     item: ForecastItem
 ) {
-    val updatedModifier = remember(item.isSelected) {
-        if (item.isSelected) {
-            modifier.background(
-                shape = RoundedCornerShape(percent = 50),
-                brush = Brush.linearGradient(
-                    0f to ColorGradient1,
-                    0.5f to ColorGradient2,
-                    1f to ColorGradient3
-                )
-            )
-        } else {
-            modifier
-        }
-    }
+    val primaryTextColor = ColorTextPrimary
 
-    val primaryTextColor = remember(item.isSelected) {
-        if (item.isSelected) ColorTextSecondary else ColorTextPrimary
-    }
+    val secondaryTextColor = ColorTextPrimaryVariant
 
-    val secondaryTextColor = remember(item.isSelected) {
-        if (item.isSelected) ColorTextSecondaryVariant else ColorTextPrimaryVariant
-    }
-
-    val temperatureTextStyle = remember(item.isSelected) {
-        if (item.isSelected) {
-            TextStyle(
-                brush = Brush.verticalGradient(
-                    0f to Color.White,
-                    1f to Color.White.copy(alpha = 0.3f)
-                ),
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Black
-            )
-        } else {
-            TextStyle(
-                color = ColorTextPrimary,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Black
-            )
-        }
-    }
+    val temperatureTextStyle = TextStyle(
+        color = ColorTextPrimary,
+        fontSize = 24.sp,
+        fontWeight = FontWeight.Black
+    )
 
     Column(
-        modifier = updatedModifier
+        modifier = modifier
             .width(65.dp)
             .padding(
                 horizontal = 10.dp,
@@ -193,16 +159,9 @@ private fun Forecast(
             modifier = Modifier.height(6.dp)
         )
         Text(
-            text = item.temperature,
+            text = "${item.temperature.toInt()}°",
             letterSpacing = 0.sp,
             style = temperatureTextStyle,
-        )
-        Spacer(
-            modifier = Modifier.height(8.dp)
-        )
-        AirQualityIndicator(
-            value = item.airQuality,
-            color = item.airQualityIndicatorColorHex
         )
     }
 }
